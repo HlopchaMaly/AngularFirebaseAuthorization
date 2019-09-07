@@ -1,0 +1,123 @@
+@import 'src/variables.scss';
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: $primary-color-grey;
+  min-height: 12vh;
+  padding: 0 2%;
+.burger{
+  color: white;
+  font-size: 36px;
+  display: none;
+}
+  .logo {
+    font: {
+      family: 'Proxima Nova Rg';
+      weight: normal;
+      style: normal;
+      size: 72px;
+    }
+
+    text-decoration: none;
+    color: white;
+    display: block;
+    cursor: pointer;
+  }
+
+
+  .button {
+
+    a {
+      display: inline-block;
+      color: white;
+
+      font: {
+        family: 'Proxima Nova Rg';
+        weight: normal;
+        style: normal;
+      }
+
+      cursor: pointer;
+      text-decoration: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      padding: 8px 32px;
+      outline: none;
+      border: 2px solid;
+      border-radius: 4px;
+      -webkit-transition: 0.2s;
+      transition: 0.2s;
+
+      &:hover {
+        background: rgba(255, 255, 255, .2);
+      }
+
+      &:active {
+        background: white;
+      }
+
+      span {
+        display: block;
+        width: 56px;
+        text-align: center;
+      }
+
+      .login-icon {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    .burger{
+      display: block;
+    }
+    .logo {
+      font-size: 48px;
+    }
+
+    .button {
+      a {
+        padding: 6px 28px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 2% 3%;
+
+    .logo {
+      font-size: 36px;
+    }
+
+    .button {
+      a {
+        padding: 5px;
+
+        .login,
+        .logout {
+          display: none;
+        }
+
+        .login-icon {
+          display: inline;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

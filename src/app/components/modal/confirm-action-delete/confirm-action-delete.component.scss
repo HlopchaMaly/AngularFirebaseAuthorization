@@ -1,0 +1,182 @@
+@import 'src/variables.scss';
+
+// Выделить общие стили с chahge-user-data -----------------------
+
+$border: 2px solid $primary-color-light-grey;
+$input-height: 45px;
+
+%btn {
+  background-color: $primary-color-grey-second;
+  color: white;
+  border: 2px solid $primary-color-grey-second;
+  border-left: none;
+  border-radius: 0px 4px 4px 0px;
+  @include font-regular(24px);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: $primary-color-grey;
+    border-color: $primary-color-grey;
+  }
+}
+
+%disabled-btn {
+  background-color: $primary-color-light-grey;
+  border-color: $primary-color-light-grey;
+  cursor: default;
+}
+
+.container {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 3px;
+
+  .text {
+    text-align: center;
+    margin: 15px 15px 10px 15px;
+    @include font-regular-italic(18px);
+  }
+
+  form {
+    width: 80%;
+    margin: 10px 0 5px 0;
+    .input-submit {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      position: relative;
+      height: $input-height;
+      margin-bottom: 15px;
+
+      .errorMessage {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-100%);
+        @include font-regular-italic(16px);
+        color: red;
+      }
+
+      input {
+        padding: 0 2%;
+        width: 75%;
+
+        border: {
+          left: $border;
+          bottom: $border;
+          top: $border;
+          right: none;
+        }
+
+        border-radius: 4px 0px 0px 4px;
+        @include font-regular(24px);
+
+        &::-webkit-input-placeholder {
+          color: #d3d0d0;
+          @include font-regular(24px);
+        }
+
+        &::-moz-placeholder {
+          color: #d3d0d0;
+          @include font-regular(24px);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      button {
+        @extend %btn;
+        width: 25%;
+      }
+
+      .disabled-btn {
+        @extend %disabled-btn;
+      }
+
+      .enabled-input {
+        border-color: $primary-color-grey-second;
+      }
+    }
+  }
+
+  // Используется тут и в "логин-компоненте". Можно вынести
+  .close-icon {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+
+    fa {
+      color: white;
+      font-size: 30px;
+      font-style: normal;
+
+      &:hover {
+        color: red;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    width: 130%;
+    form {
+      .input-submit {
+        input {
+          width: 70%;
+        }
+        button{
+          width: 30%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: 160%;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    width: 190%;
+    .text {
+      font-size: 17px;
+    }
+    form{
+      width: 90%;
+      .input-submit{
+        input {
+          &::-webkit-input-placeholder {
+            font-size: 18px;
+          }
+
+          &::-moz-placeholder {
+            font-size: 18px;
+          }
+        }
+        button{
+          font-size: 18px;
+        }
+      }
+    }
+    .close-icon {
+      top: -35px;
+      right: 0px;
+    }
+  }
+}

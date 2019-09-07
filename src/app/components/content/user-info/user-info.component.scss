@@ -1,0 +1,267 @@
+@import 'src/variables.scss';
+
+%change-data-icon {
+  fa {
+    color: #edeef0;
+    cursor: pointer;
+    font-size: 18px;
+    align-self: flex-start;
+    display: flex;
+  }
+
+  &:hover {
+    fa {
+      color: $primary-color-blue-grey;
+    }
+  }
+}
+
+%border-padding {
+  border: 1px solid $primary-color-light-grey;
+  padding: 15px;
+  border-radius: 2px;
+}
+
+%disabled-btn {
+  cursor: default;
+}
+
+.main-container {
+  position: relative;
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .subcontainer-1 {
+      display: flex;
+      align-items: flex-start;
+      
+
+      .box-photo {
+        @extend %border-padding;
+        display: flex;
+        flex-direction: column;
+
+        .photo-container {
+          width: 200px;
+          height: 200px;
+          border-radius: 2px;
+
+          .photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+          }
+
+          margin-bottom: 25px;
+        }
+
+        .button {
+          text-align: center;
+          @include font-semibold(18px);
+          display: inline-block;
+          cursor: pointer;
+          text-decoration: none;
+          padding: 5px 0;
+          outline: none;
+          border: 2px solid $primary-color-light-grey;
+          border-radius: 2px;
+
+
+          color: $primary-color-light-grey;
+
+          background-color: white;
+
+          &:hover {
+            color: white;
+            border-color: $primary-color-blue-grey;
+
+            background-color: $primary-color-blue-grey;
+          }
+
+          &:active {
+            background-color: $primary-color-grey;
+            border-color: $primary-color-grey;
+          }
+        }
+
+        .disabled-btn {
+          cursor: default;
+          &:hover {
+            color: $primary-color-light-grey;
+            border-color: $primary-color-light-grey;
+            background-color: white;
+          }
+          &:active {
+            color: $primary-color-light-grey;
+            border-color: $primary-color-light-grey;
+            background-color: white;
+          }
+        }
+      }
+
+      .box-info {
+        @extend %border-padding;
+        margin-left: 10px;
+        width: 100%;
+
+        .name-state {
+          border-bottom: 1px solid #edeef0;
+          padding-bottom: 10px;
+
+          .name {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            
+            @include font-semibold(30px);
+            @extend %change-data-icon;
+            
+
+          }
+
+          .state {
+            @include font-black(18px);
+            color: green;
+          }
+        }
+
+        .characteristics {
+          display: flex;
+          flex-direction: column;
+          margin-top: 10px;
+
+          .item {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: 5px;
+
+
+            .label {
+              flex: 2;
+              @include font-condensed-regular(18px);
+              color: #828282;
+
+            }
+
+            .info {
+              flex: 10;
+              @include font-condensed-semibold(18px);
+              color: black;
+              word-break: break-all;
+
+            }
+          }
+
+          .email {
+            @extend %change-data-icon;
+          }
+
+        }
+      }
+    }
+
+    .subcontainer-2 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      @extend %border-padding;
+      margin-top: 50px;
+
+      .box {
+        @include font-regular(30px);
+        color: #828282;
+      }
+    }
+
+  }
+
+  .task-container {
+    .temp {
+      width: 100%;
+      height: 60px;
+      background-color: $primary-color-grey-second;
+      border-radius: 2px;
+      margin-top: 10px;
+    }
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: yellow;
+  }
+}
+
+
+@media (max-width: 992px) {
+  .container {
+    .subcontainer-1 {
+      .box-photo {
+
+        .photo-container {
+          width: 175px;
+          height: 175px;
+        }
+      }
+
+      .box-info {
+
+        .characteristics {
+          .item {
+            font-size: 16px;
+
+            .label {
+              flex: 3;
+            }
+
+            .info {
+              flex: 9;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .info-container {
+    .subcontainer-1 {
+      flex-direction: column;
+      align-items: center !important;
+      justify-content: center;
+
+      .box-photo {
+        .photo-container {
+          height: 200px;
+          width: 240px;
+        }
+      }
+
+      .box-info {
+        margin-top: 10px;
+      }
+    }
+
+    .subcontainer-2 {
+      margin-top: 10px;
+
+      .box {
+        font-size: 24px;
+      }
+    }
+  }
+}

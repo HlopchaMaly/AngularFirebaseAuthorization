@@ -1,0 +1,16 @@
+<div class="header">
+  <!-- Блок-иконка "гамбургер".
+    Должен отображатся на разрешении < 768px && если осуществлен вход в аккаунт. -->
+  <div *ngIf="isLogIn" class="burger" (click)="onBurgerClick()">
+    <fa name="bars"></fa>
+  </div>
+  <a routerLink="home" class="logo">Task Manager</a>
+  <div class="button">
+    <a (click)="onHeaderButtonClick()">
+      <span class="login">{{buttonText}}</span>
+      <span class="login-icon">
+        <fa [name]="iconName"></fa>
+      </span>
+    </a>
+  </div>
+</div>

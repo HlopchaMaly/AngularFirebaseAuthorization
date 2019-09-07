@@ -1,0 +1,29 @@
+<div class="container">
+  <form novalidate [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" class="form">
+
+    <h2>{{actionType}}</h2>
+
+    <div class="input-group">
+      <div class="errorMessage">{{formErrors.email}}</div>
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email adress">
+    </div>
+    <div class="input-group">
+      <div class="errorMessage">{{formErrors.password}}</div>
+      <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+    </div>
+    <div class="input-group">
+      <div class="errorMessage">{{formErrors.userName}}</div>
+      <input [@toggleNameInput]="currentVisibleState" type="text" class="form-control name-input" id="userName"
+        formControlName="userName" placeholder="User name">
+    </div>
+
+    <button type="submit" [disabled]="!loginForm.valid" class="btnSubmit" [class.btnDisabled]="!loginForm.valid">{{actionType}}</button>
+    <a (click)="toggleData()" class="link">{{phraseForToggle}}</a>
+    <a (click)="resetPassword()" *ngIf="!needCreateAccount" class="link">Forgot your password?</a>
+  </form>
+
+  <div class="close-icon" (click)="closeModal()">
+    <fa name="close"></fa>
+  </div>
+
+</div>

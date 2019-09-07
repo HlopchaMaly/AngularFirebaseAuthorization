@@ -1,0 +1,94 @@
+@import 'src/variables.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: $primary-color-grey;
+  min-height: 10vh;
+
+  .subcontainer {
+    width: 88%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .logo {
+      display: block;
+
+      font: {
+        family: 'Proxima Nova Rg';
+        weight: normal;
+        style: italic;
+        size: 36px;
+      }
+
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin: 0;
+        color: white;
+      }
+
+      .cont {
+        font: {
+          family: 'Proxima Nova Lt';
+          weight: 300;
+          style: italic;
+        }
+      }
+
+      .email {
+        font: {
+          family: 'Proxima Nova Lt';
+          weight: 600;
+          style: italic;
+          size: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    .subcontainer {
+      justify-content: space-around;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .logo {
+        flex: none;
+
+        font: {
+          family: 'Proxima Nova Lt';
+          weight: 300;
+          style: italic;
+          size: 28px;
+        }
+
+        margin-right: 20px;
+      }
+
+      .contacts {
+        flex: none;
+
+        .cont {
+          display: none;
+        }
+
+        .email {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

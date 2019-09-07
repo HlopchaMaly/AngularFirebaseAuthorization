@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="text">
+    <div class="attention">
+      Attention, after confirming the action, all account data will be destroyed!
+    </div>
+  </div>
+  <form novalidate [formGroup]="passwordForm" (ngSubmit)="onSubmit(passwordForm)" class="form">
+    <div class="input-submit">
+      <div class="errorMessage">{{formErrors.password}}</div>
+      <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password"
+        [class.enabled-input]="passwordForm.controls['password'].valid">
+      <button type="submit" [disabled]="!passwordForm.valid" class="confirm" [class.disabled-btn]="!passwordForm.valid">Submit</button>
+    </div>
+  </form>
+  <div class="close-icon" (click)="closeModal()">
+    <fa name="close"></fa>
+  </div>
+</div>

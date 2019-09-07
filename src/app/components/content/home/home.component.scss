@@ -1,0 +1,40 @@
+@import 'src/variables.scss';
+.container {
+  min-height: 70vh;
+  .desc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+
+    .img-wrap {
+      width: 88%;
+
+      img {
+        width: 100%;
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    h2 {
+      font: {
+        family: 'Proxima Nova Lt';
+        weight: 600;
+        style: normal;
+        size: 36px;
+      }
+
+      margin: 15px 0;
+    }
+
+    p {
+      @include font-regular(18px);
+
+      width: 88%;
+      margin: 0 0 10px 0;
+    }
+  }
+}

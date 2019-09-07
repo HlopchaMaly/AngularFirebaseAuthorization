@@ -1,0 +1,11 @@
+<div class="container">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
+<!-- Блок для модальных окон -->
+<div id="modal-container" class="hidden"></div>
+<!-- Черный фон модальных окон -->
+<div id="overlay" (click)="closeModal()" class="hidden"></div>
+<app-tooltip *ngIf="isTooltipVisible" [topValueChild]="topPosition" [leftValueChild]="leftPosition"></app-tooltip>
+

@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="text">
+        
+        <ul>
+            <li>Enter the email you provided during registration.</li>
+            <li>An email will be sent to your email address.</li>
+            <li>Follow the link inside the letter to change password.</li>
+            <li>Log in with new password.</li>
+          </ul>
+    </div>
+  <form novalidate [formGroup]="emailForm" (ngSubmit)="onSubmit(emailForm)" class="form">
+    <div class="input-submit">
+      <div class="errorMessage">{{formErrors.email}}</div>
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email"
+        [class.enabled-input]="emailForm.controls['email'].valid">
+      <button type="submit" [disabled]="!emailForm.valid" class="confirm" [class.disabled-btn]="!emailForm.valid">Submit</button>
+    </div>
+  </form>
+  <div class="close-icon" (click)="closeModal()">
+    <fa name="close"></fa>
+  </div>
+</div>

@@ -1,0 +1,351 @@
+@import 'src/variables.scss';
+
+// Выделить общие стили с confirm-action-component ------------------------------
+$border: 2px solid $primary-color-light-grey;
+$input-height: 45px;
+$font-size-minimal: 20px;
+
+%btn {
+  width: 15%;
+  background-color: $primary-color-grey-second;
+  color: white;
+  border: 2px solid $primary-color-grey-second;
+  border-radius: 0px 4px 4px 0px;
+  @include font-regular(24px);
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    background-color: $primary-color-grey;
+    border-color: $primary-color-grey;
+  }
+}
+
+%disabled-btn {
+  background-color: $primary-color-light-grey;
+  border-color: $primary-color-light-grey;
+  cursor: default;
+}
+
+.container {
+
+  display: flex;
+  justify-content: right;
+  width: 80%;
+
+  .subcontainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    border: $border;
+    border-radius: 4px;
+
+    .main-label {
+      position: absolute;
+      top: 0;
+      left: 20px;
+      transform: translateY(-50%);
+      padding: 0 5px 5px;
+      @include font-condensed-regular-italic(18px);
+      background-color: white;
+      color: $primary-color-light-grey;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      margin-top: 10px;
+
+      .label {
+        margin: {
+          top: 5px;
+          right: 5px;
+          bottom: 15px;
+          left: 5px;
+
+        }
+
+        @include font-regular-italic(18px);
+        color: $primary-color-grey-second;
+      }
+
+      .input-submit {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        position: relative;
+        height: $input-height;
+        margin-bottom: 15px;
+
+        .errorMessage {
+          position: absolute;
+          top: 0;
+          left: 0;
+          transform: translateY(-100%);
+          @include font-regular-italic(16px);
+          color: red;
+        }
+
+        input {
+          padding: 0 2%;
+          width: 45%;
+
+          border: {
+            left: $border;
+            bottom: $border;
+            top: $border;
+            right: none;
+          }
+
+          border-radius: 4px 0px 0px 4px;
+          @include font-regular(24px);
+
+          &::-webkit-input-placeholder {
+            color: #d3d0d0;
+            @include font-regular(24px);
+          }
+
+          &::-moz-placeholder {
+            color: #d3d0d0;
+            @include font-regular(24px);
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        button {
+          @extend %btn;
+        }
+
+
+        .disabled-btn {
+          @extend %disabled-btn;
+        }
+
+        .enabled-input {
+          border-color: $primary-color-grey-second;
+        }
+      }
+
+      /* Загрузка файла */
+      .file-upload-container {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        height: $input-height;
+        margin-bottom: 15px;
+
+        .file-upload {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          width: 6%;
+          overflow: hidden;
+          background-color: $primary-color-grey-second;
+          color: white;
+          border: 2px solid $primary-color-grey-second;
+          border-radius: 4px 0px 0px 4px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $primary-color-blue-grey;
+            border-color: $primary-color-blue-grey;
+          }
+
+          &:active {
+    background-color: $primary-color-grey;
+    border-color: $primary-color-grey;
+  }
+
+          span {
+            font-size: 26px;
+          }
+
+          input {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            z-index: -1;
+          }
+        }
+
+        .text {
+          display: flex;
+          align-items: center;
+          width: 39%;
+          padding: 0 2%;
+
+          color: #d3d0d0;
+          @include font-regular(24px);
+
+          border: {
+            top: $border;
+            bottom: $border;
+          }
+
+          p {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .enabled-input {
+          border-color: $primary-color-grey-second;
+          color: $primary-color-grey-second;
+        }
+
+        button {
+          @extend %btn;
+        }
+
+        .disabled-btn {
+          @extend %disabled-btn;
+        }
+      }
+
+      /* Удаление аккаунта */
+      .delete-container {
+        width: 100%;
+
+        button {
+
+            width: 35%;
+            background-color: $primary-color-grey-second;
+            color: white;
+            border: 2px solid $primary-color-grey-second;
+            border-radius: 4px;
+            @include font-regular(18px);
+            cursor: pointer;
+
+            &:focus {
+              outline: none;
+            }
+
+            &:active {
+              background-color: rgb(224, 1, 1) !important;
+              border-color: rgb(224, 1, 1) !important;
+            }
+
+            &:hover {
+              background-color: red;
+              border: 2px solid red;
+              border-radius: 4px;
+            }
+
+        }
+
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+
+    .subcontainer {
+      form {
+        .input-submit {
+          input {
+            width: 60%;
+          }
+
+          button {
+            width: 20%;
+          }
+        }
+
+        .file-upload-container {
+          .file-upload {
+            width: 9%;
+          }
+
+          .text {
+            width: 51%;
+          }
+
+          button {
+            width: 20%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    .subcontainer {
+      form {
+        .input-submit {
+          input {
+            padding: 0 4%;
+            width: 75%;
+
+            &::-webkit-input-placeholder {
+              font-size: $font-size-minimal;
+            }
+
+            &::-moz-placeholder {
+              font-size: $font-size-minimal;
+            }
+          }
+
+          button {
+            width: 25%;
+            font-size: $font-size-minimal;
+          }
+        }
+
+        .file-upload-container {
+          .file-upload {
+            width: 13%;
+
+            span {
+              font-size: $font-size-minimal;
+            }
+          }
+
+          .text {
+            padding: 0 4%;
+            width: 62%;
+            font-size: $font-size-minimal;
+          }
+
+          button {
+            width: 25%;
+            font-size: $font-size-minimal;
+          }
+        }
+
+        .delete-container {
+          display: flex;
+          justify-content: center;
+          button {
+            width: 90%;
+          }
+        }
+      }
+    }
+  }
+}

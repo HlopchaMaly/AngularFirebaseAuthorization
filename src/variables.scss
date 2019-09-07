@@ -1,0 +1,105 @@
+$primary-color-grey: #2f4f4f;
+$primary-color-grey-second: #727F7F;
+$primary-color-blue-grey: #79CCCC;
+$primary-color-blue: #98FFFF;
+$primary-color-dirty-white: #E4FFFF;
+$primary-color-light-grey: #edeef0;
+
+@mixin font-regular($fontSize) {
+  font: {
+    family: 'Proxima Nova Rg';
+    weight: normal;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-semibold($fontSize) {
+  font: {
+    family: 'Proxima Nova Lt';
+    weight: 600;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-regular-italic($fontSize) {
+  font: {
+    family: 'Proxima Nova Rg';
+    weight: normal;
+    style: italic;
+    size: $fontSize;
+  }
+}
+
+@mixin font-light($fontSize) {
+  font: {
+    family: 'Proxima Nova Lt';
+    weight: 300;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-condensed-regular($fontSize) {
+  font: {
+    family: 'Proxima Nova Cn Rg';
+    weight: normal;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-condensed-thin($fontSize) {
+  font: {
+    family: 'Proxima Nova Cn Th';
+    weight: 100;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin  font-black($fontSize) {
+  font: {
+    family: 'Proxima Nova Bl';
+    weight: 900;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin  font-bold($fontSize) {
+  font: {
+    family: 'Proxima Nova Rg';
+    weight: bold;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-condensed-light($fontSize) {
+  font: {
+    family: 'Proxima Nova ExCn Lt';
+    weight: 300;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-condensed-semibold($fontSize) {
+  font: {
+    family: 'Proxima Nova Cn Lt';
+    weight: 600;
+    style: normal;
+    size: $fontSize;
+  }
+}
+
+@mixin font-condensed-regular-italic($fontSize) {
+  font: {
+    family: 'Proxima Nova Cn Rg';
+    weight: normal;
+    style: italic;
+    size: $fontSize;
+  }
+}
