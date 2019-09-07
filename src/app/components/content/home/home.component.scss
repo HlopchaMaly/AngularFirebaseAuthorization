@@ -1,7 +1,7 @@
 @import 'src/variables.scss';
 .container {
   min-height: 70vh;
-  .desc {
+  .desc-wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,12 +29,18 @@
 
       margin: 15px 0;
     }
-
-    p {
-      @include font-regular(18px);
-
-      width: 88%;
+   
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: 0 0 10px 0;
+      p {
+        @include font-regular(18px);
+  
+        width: 88%;
+       
+      }
     }
   }
 }
