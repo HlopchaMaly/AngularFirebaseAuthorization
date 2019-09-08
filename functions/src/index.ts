@@ -4,6 +4,8 @@ import { timer } from 'rxjs';
 
 admin.initializeApp(functions.config().firebase);
 
+// Cloud Function. Применяется для удаления аккаунта вновь зарегистрированного пользователя, 
+// если email, указанный при регистрации не был подтвержден в течение часа.
 
 export const deleteNoVerificatedUserTrigger = functions.auth.user().onCreate((user) => {
     const oneMinute: number = 60000;

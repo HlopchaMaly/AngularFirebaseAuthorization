@@ -10,7 +10,7 @@
 
     .img-wrap {
       width: 88%;
-
+      align-self: center;
       img {
         width: 100%;
         display: block;
@@ -30,15 +30,26 @@
       margin: 15px 0;
     }
    
+    h3 {
+      font: {
+        family: 'Proxima Nova Lt';
+        weight: 600;
+        style: normal;
+        size: 32px;
+      }
+
+      margin: 15px 0;
+    }
     .description {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: left;
       margin: 0 0 10px 0;
+      width: 88%;
       p {
         @include font-regular(18px);
-  
-        width: 88%;
+        display: block;
+        
        
       }
     }
