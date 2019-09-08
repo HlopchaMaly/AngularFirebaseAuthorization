@@ -17,7 +17,8 @@
         formControlName="userName" placeholder="User name">
     </div>
 
-    <button type="submit" [disabled]="!loginForm.valid" class="btnSubmit" [class.btnDisabled]="!loginForm.valid">{{actionType}}</button>
+    <button type="submit" [disabled]="!loginForm.valid" class="btnSubmit"
+      [class.btnDisabled]="!loginForm.valid">{{actionType}}</button>
     <a (click)="toggleData()" class="link">{{phraseForToggle}}</a>
     <a (click)="resetPassword()" *ngIf="!needCreateAccount" class="link">Forgot your password?</a>
   </form>

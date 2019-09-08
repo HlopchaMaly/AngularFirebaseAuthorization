@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tasks-home.component.html',
   styleUrls: ['./tasks-home.component.scss']
 })
+
+// Функционал пока не реализован.
 export class TasksHomeComponent implements OnInit {
 
   constructor() { }

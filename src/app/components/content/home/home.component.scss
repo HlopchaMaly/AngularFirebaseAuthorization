@@ -1,6 +1,8 @@
 @import 'src/variables.scss';
+
 .container {
   min-height: 70vh;
+
   .desc-wrap {
     display: flex;
     flex-direction: column;
@@ -11,6 +13,7 @@
     .img-wrap {
       width: 88%;
       align-self: center;
+
       img {
         width: 100%;
         display: block;
@@ -29,7 +32,7 @@
 
       margin: 15px 0;
     }
-   
+
     h3 {
       font: {
         family: 'Proxima Nova Lt';
@@ -40,17 +43,19 @@
 
       margin: 15px 0;
     }
+
     .description {
       display: flex;
       flex-direction: column;
       align-items: left;
       margin: 0 0 10px 0;
       width: 88%;
+
       p {
         @include font-regular(18px);
         display: block;
-        
-       
+
+
       }
     }
   }

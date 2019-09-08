@@ -53,10 +53,12 @@ export class UiHomeComponent implements OnInit, OnDestroy, ComponentCanDeactivat
 
   }
 
+  // Сворачивание-разворачивание навбара.
   toggleNav() {
     this.state === 'showOnSmallScreen' ? this.state = 'hide' : this.state = 'showOnSmallScreen';
   }
 
+  // Закрытие навбара.
   closeNav() {
     if (this.currentWindowWidth <= this.maxWindowWidth) {
       this.state = 'hide';
@@ -65,7 +67,7 @@ export class UiHomeComponent implements OnInit, OnDestroy, ComponentCanDeactivat
     }
   }
 
-  // Метод работает совместно с GuardService при выходе из аккаунта/UI и 
+  // Метод работает совместно с GuardService при выходе из аккаунта/UI и
   // переходе на главную страницу (home.component).
   private goAway(): boolean {
     // userService.redirectWithoutGuard будет иметь значение true при удалении пользователя,
@@ -86,7 +88,7 @@ export class UiHomeComponent implements OnInit, OnDestroy, ComponentCanDeactivat
     }
   }
 
-  // Реализация метода интерфейса ComponentCanDeactivate.
+  // Реализация метода интерфейса ComponentCanDeactivate (для работы гуардов).
   canDeactivate(): boolean | Observable<boolean> {
     return this.goAway();
   }

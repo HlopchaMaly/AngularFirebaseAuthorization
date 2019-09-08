@@ -17,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ChangeUserDataComponent implements OnInit, OnDestroy {
 
+  // Обращение к соответствующим шаблонным переменным.
   @ViewChild('emailInput')
   emailInput: ElementRef;
 
@@ -29,7 +30,6 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
   private errorSubscriber: Subscription;
   private querySubscriber: Subscription;
 
-  
   changeDataForm: FormGroup;
 
   selectedFiles: FileList;
@@ -47,6 +47,7 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
     photo: ''
   };
 
+  // Ошибки валидации формы.
   validationMessages = {
     email: {
       'required': '',
@@ -66,39 +67,46 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
 
     this.buildForm();
 
+    // Наблюдаем пользователя в store.
     this.userSubscriber = this.store.select('userPage').subscribe(({ user }) => {
       this.user = user;
     });
+
+    // Ловим параметр строки запроса, для фокусировки на соответсвующем инпуте. Т.е. если
+    // нажата шестеренка напротив имени в user-info.component - фокус на инпут, изменяющий
+    // имя. С почтой аналогично.
     this.querySubscriber = this.route.queryParams.subscribe(params => {
-      
-      switch(params.inputName) { 
-        case 'emailInput': { 
-           this.emailInput.nativeElement.focus(); 
-           break; 
-        } 
-        case 'nameInput': { 
+      switch (params.inputName) {
+        case 'emailInput': {
+           this.emailInput.nativeElement.focus();
+           break;
+        }
+        case 'nameInput': {
            this.nameInput.nativeElement.focus();
-           break; 
-        } 
-        default: { 
-           break; 
-        } 
-     } 
-    })
+           break;
+        }
+        default: {
+           break;
+        }
+     }
+    });
   }
 
   buildForm() {
     this.changeDataForm = this.formBuilder.group({
       email: ['', [
         Validators.required,
+        // Стандартный валидатор.
         Validators.email
       ]],
       userName: ['', [
         Validators.required,
+        // 2 - 22 симвлола, без кириллицы, начало с английской.
         Validators.pattern('^[a-zA-Z][a-zA-Z0-9-_/.]{1,20}$')
       ]],
       photo: ['', [
         Validators.required,
+        // Начало (http://www.|https://www.|http://|https://), окончание (.jpg|.png|.svg).
         Validators.pattern('^(http://www\.|https://www\.|http://|https://)([\\S])+(\.jpg|\.png|\.svg)$')
       ]],
 
@@ -108,6 +116,7 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
     this.onValueChange();
   }
 
+  // Отображение ошибок валидации в UI.
   onValueChange(data?: any) {
     if (!this.changeDataForm) {
       return;
@@ -129,18 +138,18 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Вызов модального окна-подтверждения при изменении почты (confirm-action-change-email.component).
   onChangeEmail() {
     const newEmail = this.changeDataForm.controls['email'].value;
     this.modalService.init(ConfirmActionChangeEmailComponent, {email: newEmail}, {});
   }
-  
+
   onChangeName() {
     // Берем данные из инпута.
     this.user.name = this.changeDataForm.controls['userName'].value;
-    // Меняем имя в профиле,
+    // Меняем имя в профиле.
     this.userService.changeName(this.user);
     this.changeDataForm.controls['userName'].reset();
-    console.log('Имя изменено');
   }
 
   onChangePhotoUrl() {
@@ -164,16 +173,18 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
     this.selectedFiles = null;
   }
 
+  // Вызов модального окна-подтверждения при удалении пользователя (confirm-action-delete.component).
   onDelete() {
     this.modalService.init(ConfirmActionDeleteComponent, {user: this.user}, {});
   }
 
+  // Отображение ошибки "адресПочтыУжеЗанят" при изменении почты.
   generateAuthorisationErr() {
     const existEmailFirebaseMsg = 'The email address is already in use by another account.';
     const invalidEmailMsg = 'This email already exists';
 
     this.errorSubscriber = this.userService.err.subscribe((errMsg: string) => {
-      if(errMsg === existEmailFirebaseMsg) {
+      if (errMsg === existEmailFirebaseMsg) {
         this.formErrors.email = invalidEmailMsg;
       }
     });

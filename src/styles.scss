@@ -1,10 +1,10 @@
 @import 'src/variables.scss';
-body, p {
+
+body,
+p {
   padding: 0;
   margin: 0;
 }
-
-
 
 // Слайдер
 .main-slider-container {
@@ -87,7 +87,6 @@ body, p {
   }
 }
 
-
 @media (max-width: 768px) {
   .main-slider-container {
     .carousel {
@@ -110,7 +109,6 @@ body, p {
       .slick-next {
         display: none;
       }
-
     }
   }
 }

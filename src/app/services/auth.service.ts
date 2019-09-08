@@ -36,7 +36,6 @@ export class AuthService {
         this.getCurrentAuthState.emit(this.currentAuthState);
         this.userService.loadUser(fireUser.uid);
         this.router.navigate(['/ui-home']);
-        //this.router.navigate(['/ui-home/user-info']);
       } else {
         this.currentAuthState = false;
         this.getCurrentAuthState.emit(this.currentAuthState);
@@ -90,7 +89,7 @@ export class AuthService {
           this.modalService.destroy();
           if (currentUser.user.emailVerified) {
             console.log('Вход в аккаунт');
-          }else {
+          } else {
             alert('Email is not verified. Please check your mail and go to the link inside the letter.');
           }
         })

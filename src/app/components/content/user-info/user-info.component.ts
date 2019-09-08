@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Store } from '@ngrx/store';
@@ -21,17 +21,22 @@ export class UserInfoComponent implements OnInit, OnDestroy {
   isBtnDisabled: boolean;
 
 
-  constructor(private tooltipService: TooltipService, private store: Store<User>, private userService: UserService, private authService: AuthService, private router: Router) {
-    
+  constructor(private tooltipService: TooltipService, private store: Store<User>,
+    private userService: UserService, private authService: AuthService, private router: Router) {
+
   }
 
   ngOnInit() {
+    // "Наблюдаем" за текущим пользователем в store.
     this.subscriber = this.store.select('userPage').subscribe(({ user }) => {
       this.photo = user.photo;
       this.userCurrent = user ;
-      if(this.photo === this.authService.defaultPathToPhoto){
+      // "Деактивация" кнопки "удалить фото". Поскольку кнопка реализована путем стилизации
+      // тега <a>, фактической деактивации не происходит. Эффект "деактивированной"
+      // кнопки осуществляется путем class binding.
+      if (this.photo === this.authService.defaultPathToPhoto) {
         this.isBtnDisabled = true;
-      }else{
+      } else {
         this.isBtnDisabled = false;
       }
     });
@@ -41,29 +46,31 @@ export class UserInfoComponent implements OnInit, OnDestroy {
     return this.store.select('userPage');
   }
 
+  // Удаление фото пользователя с заменой на дефолтное.
   onDelete() {
-    // Если установлено дефолтное фото отсутствует необходимость лезть в базу
-    if(this.photo === this.authService.defaultPathToPhoto){
-      console.log("Foto is not dowload");
-    }else{
+    // Если установлено дефолтное фото отсутствует необходимость лезть в базу.
+    if (this.photo === this.authService.defaultPathToPhoto) {
+      console.log('Foto is not dowload');
+    } else {
       this.userService.deletePhoto(this.userCurrent);
       this.photo = this.authService.defaultPathToPhoto;
       this.userCurrent.pathToOldPhotoInStorage = '';
       this.userCurrent.photo = this.photo;
       this.userService.updateUser(this.userCurrent);
     }
-    
+
   }
   // Метод для перехода на компонент с формой изменения данных пользователя.
-  goToChangeUserComponent(inputName: String){
+  goToChangeUserComponent(inputName: String) {
     this.toggleTooltip(false);
     // Параметр строки запроса применяется для "фокуса" на соответствующем инпуте после перехода.
-    // Т.е. если пользователь тыкнул по шестеренке-fa напротив имени пользователя - 
+    // Т.е. если пользователь тыкнул по шестеренке-fa напротив имени пользователя -
     // фокус поймает инпут, изменяющий имя. С почтой всё аналогично.
-    this.router.navigate(['/ui-home/change-user-data'],{queryParams: {inputName : inputName}});
+    this.router.navigate(['/ui-home/change-user-data'], {queryParams: {inputName : inputName}});
   }
 
-  toggleTooltip(showTooltip: boolean, event?: MouseEvent){
+  // Показать-скрыть тултип.
+  toggleTooltip(showTooltip: boolean, event?: MouseEvent) {
     this.tooltipService.generateTooltipEvent(showTooltip, event);
   }
 

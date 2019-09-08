@@ -122,6 +122,7 @@
         overflow: hidden;
         border-right: 1px solid $primary-color-grey;
         z-index: 99;
+
         a {
           white-space: nowrap;
           font-size: 18px;
@@ -141,9 +142,9 @@
 }
 
 @media (max-width: 576px) {
-  .container{
-    .nav{
-      .box{
+  .container {
+    .nav {
+      .box {
         width: 100%;
       }
     }

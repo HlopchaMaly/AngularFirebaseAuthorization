@@ -13,11 +13,13 @@
   background-color: $primary-color-grey;
   min-height: 12vh;
   padding: 0 2%;
-.burger{
-  color: white;
-  font-size: 36px;
-  display: none;
-}
+
+  .burger {
+    color: white;
+    font-size: 36px;
+    display: none;
+  }
+
   .logo {
     font: {
       family: 'Proxima Nova Rg';
@@ -81,9 +83,10 @@
 
 @media (max-width: 768px) {
   .header {
-    .burger{
+    .burger {
       display: block;
     }
+
     .logo {
       font-size: 48px;
     }

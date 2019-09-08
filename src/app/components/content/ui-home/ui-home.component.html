@@ -1,31 +1,31 @@
 <div class="container" (window:resize)="onResize($event)">
   <div class="nav" [@navState]="state" (click)="closeNav()">
-   <div class="box">
-    <a routerLink="user-info" routerLinkActive="active">
-      <span class="icon">
-        <fa name="info"></fa>
-      </span>
-      <span class="label">
-        User info
-      </span>
-    </a>
-    <a routerLink="change-user-data" routerLinkActive="active">
-      <span class="icon">
-        <fa name="cog"></fa>
-      </span>
-      <span class="label">
-        Change user data
-      </span>
-    </a>
-    <a routerLink="tasks-home" routerLinkActive="active">
-      <span class="icon">
-        <fa name="tasks"></fa>
-      </span>
-      <span class="label">
-        Tasks
-      </span>
-    </a>
-   </div>
+    <div class="box">
+      <a routerLink="user-info" routerLinkActive="active">
+        <span class="icon">
+          <fa name="info"></fa>
+        </span>
+        <span class="label">
+          User info
+        </span>
+      </a>
+      <a routerLink="change-user-data" routerLinkActive="active">
+        <span class="icon">
+          <fa name="cog"></fa>
+        </span>
+        <span class="label">
+          Change user data
+        </span>
+      </a>
+      <a routerLink="tasks-home" routerLinkActive="active">
+        <span class="icon">
+          <fa name="tasks"></fa>
+        </span>
+        <span class="label">
+          Tasks
+        </span>
+      </a>
+    </div>
   </div>
   <div class="user-content">
     <router-outlet></router-outlet>

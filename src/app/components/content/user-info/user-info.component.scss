@@ -37,7 +37,7 @@
     .subcontainer-1 {
       display: flex;
       align-items: flex-start;
-      
+
 
       .box-photo {
         @extend %border-padding;
@@ -92,11 +92,13 @@
 
         .disabled-btn {
           cursor: default;
+
           &:hover {
             color: $primary-color-light-grey;
             border-color: $primary-color-light-grey;
             background-color: white;
           }
+
           &:active {
             color: $primary-color-light-grey;
             border-color: $primary-color-light-grey;
@@ -118,10 +120,10 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            
+
             @include font-semibold(30px);
             @extend %change-data-icon;
-            
+
 
           }
 
@@ -192,15 +194,6 @@
       border-radius: 2px;
       margin-top: 10px;
     }
-  }
-
-  .spinner-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: yellow;
   }
 }
 

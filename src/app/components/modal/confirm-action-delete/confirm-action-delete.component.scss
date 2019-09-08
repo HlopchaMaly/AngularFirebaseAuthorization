@@ -49,6 +49,7 @@ $input-height: 45px;
   form {
     width: 80%;
     margin: 10px 0 5px 0;
+
     .input-submit {
       display: flex;
       flex-direction: row;
@@ -132,12 +133,14 @@ $input-height: 45px;
 @media (max-width: 992px) {
   .container {
     width: 130%;
+
     form {
       .input-submit {
         input {
           width: 70%;
         }
-        button{
+
+        button {
           width: 30%;
         }
       }
@@ -154,12 +157,15 @@ $input-height: 45px;
 @media (max-width: 576px) {
   .container {
     width: 190%;
+
     .text {
       font-size: 17px;
     }
-    form{
+
+    form {
       width: 90%;
-      .input-submit{
+
+      .input-submit {
         input {
           &::-webkit-input-placeholder {
             font-size: 18px;
@@ -169,11 +175,13 @@ $input-height: 45px;
             font-size: 18px;
           }
         }
-        button{
+
+        button {
           font-size: 18px;
         }
       }
     }
+
     .close-icon {
       top: -35px;
       right: 0px;

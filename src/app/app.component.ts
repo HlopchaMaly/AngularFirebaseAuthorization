@@ -15,15 +15,16 @@ export class AppComponent {
   leftPosition: number;
 
   constructor(private modalService: ModalService, private tooltipService: TooltipService) {
+    // Управление состоянием тултипа - видимостью и положением.
     this.tooltipService.receiveTooltipEvent().subscribe(data => {
-      if(data.elementParams){
+      if (data.elementParams) {
         this.isTooltipVisible = data.visibility;
         this.topPosition = data.elementParams.top;
         this.leftPosition = data.elementParams.left;
-      }else{
+      } else {
         this.isTooltipVisible = data.visibility;
       }
-    })
+    });
   }
 
   closeModal() {

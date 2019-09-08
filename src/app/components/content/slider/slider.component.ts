@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss']
 })
+
+// Для реализации слайдера использована библиотека ngx-slick.
 export class SliderComponent implements OnInit {
 
   slides = [

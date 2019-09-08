@@ -1,8 +1,5 @@
 @import 'src/variables.scss';
 
-// Выделить общие стили с chahge-user-data -----------------------
-// И с confirm-action-component ----------------------------------------------------------
-
 $border: 2px solid $primary-color-light-grey;
 $input-height: 45px;
 
@@ -116,7 +113,7 @@ $input-height: 45px;
     }
   }
 
-  // Используется тут и в "логин-компоненте". Можно вынести
+  // Используется тут и в "логин-компоненте". Можно вынести.
   .close-icon {
     position: absolute;
     top: -30px;

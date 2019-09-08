@@ -1,4 +1,3 @@
-import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -45,6 +44,7 @@ export class ConfirmActionChangeEmailComponent implements OnInit, OnDestroy {
     this.onValueChange();
   }
 
+  // Ошибки валидации формы.
   onValueChange(data?: any) {
     if (!this.passwordForm) {
       return;

@@ -12,7 +12,7 @@ export interface ComponentCanDeactivate {
 })
 
 // Сервис предотвращает переход/уход с маршрута .../ui-home/...
-// Т.е. неавторизованный пользователь не может перейти на маршрут .../ui-home/..., 
+// Т.е. неавторизованный пользователь не может перейти на маршрут .../ui-home/...,
 // также нельзя уйти с данного маршрута без выхода из аккаунта firebase.
 
 export class GuardService implements CanActivate, CanDeactivate<ComponentCanDeactivate> {

@@ -10,17 +10,17 @@ export class TooltipService {
 
   private subject = new Subject<any>();
 
-  generateTooltipEvent(isTooltipVisible: boolean, event?: MouseEvent){
-    if(event){
+  generateTooltipEvent(isTooltipVisible: boolean, event?: MouseEvent) {
+    if (event) {
       const element = event.target as HTMLElement;
       this.subject.next({visibility: isTooltipVisible, elementParams: element.getBoundingClientRect()});
 
-    }else{
+    } else {
       this.subject.next({visibility: isTooltipVisible});
     }
   }
 
-  receiveTooltipEvent() : Observable<any> {
+  receiveTooltipEvent(): Observable<any> {
     return this.subject.asObservable();
   }
 

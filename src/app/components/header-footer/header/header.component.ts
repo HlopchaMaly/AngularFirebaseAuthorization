@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
     private commonService: CommonService, private router: Router) {
     this.authService.getCurrentAuthState.subscribe((val: boolean) => {
       this.isLogIn = val;
+      // Меняем надпись или изображение на кнопке "Login" в зависимости от состояния авторизации.
       if (val) {
         this.buttonText = 'LogOut';
         this.iconName = 'sign-out';
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Вызов модального окна авторизации-регистрации (login.component).
   showModal() {
     this.modalService.init(LoginComponent, {}, {});
   }

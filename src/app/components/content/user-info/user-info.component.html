@@ -13,9 +13,10 @@
         <div class="name-state">
           <div class="name">
             <p>{{(user | async).user.name}}</p>
-            <fa name="cog" (click)="goToChangeUserComponent('nameInput')" (mouseenter)="toggleTooltip(true, $event)" (mouseleave)="toggleTooltip(false)"></fa>
+            <fa name="cog" (click)="goToChangeUserComponent('nameInput')" (mouseenter)="toggleTooltip(true, $event)"
+              (mouseleave)="toggleTooltip(false)"></fa>
           </div>
-  
+
           <p class="state">Rock</p>
         </div>
         <div class="characteristics">
@@ -26,8 +27,9 @@
           <div class="item email">
             <p class="label">Email:</p>
             <p class="info">{{(user | async).user.email}}</p>
-            <fa name="cog" (click)="goToChangeUserComponent('emailInput')" (mouseenter)="toggleTooltip(true, $event)" (mouseleave)="toggleTooltip(false)"></fa>
-           
+            <fa name="cog" (click)="goToChangeUserComponent('emailInput')" (mouseenter)="toggleTooltip(true, $event)"
+              (mouseleave)="toggleTooltip(false)"></fa>
+
           </div>
           <div class="item">
             <p class="label">Photo:</p>
@@ -56,23 +58,20 @@
         </div>
       </div>
     </div>
+
+    <!-- Не реализовано. Заглушки -->
     <div class="subcontainer-2">
-      <!-- ----------------------Цикл нужОн-------------- -->
       <div class="box">Info-1</div>
       <div class="box">Info-2</div>
       <div class="box">Info-3</div>
       <div class="box">Info-4</div>
     </div>
   </div>
-  
+
   <div class="task-container">
     <div class="temp"></div>
     <div class="temp"></div>
     <div class="temp"></div>
     <div class="temp"></div>
   </div>
-  
-  <!-- <div class="spinner-container" *ngIf="!photo">
-    <app-spinner *ngIf="!photo"></app-spinner>
-  </div> -->
 </div>

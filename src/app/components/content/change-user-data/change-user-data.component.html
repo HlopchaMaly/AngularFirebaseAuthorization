@@ -2,28 +2,32 @@
   <div class="subcontainer">
     <div class="main-label">Change-user-data-form</div>
     <form novalidate [formGroup]="changeDataForm">
-      <!-- Изменение почты -->
-      <div class="label">Enter new email:</div>
-      <div class="input-submit">
-        <div class="errorMessage">{{formErrors.email}}</div>
-        <input type="text" #emailInput formControlName="email" placeholder="Email" [class.enabled-input]="changeDataForm.controls['email'].valid">
-        <button type="submit" [disabled]="changeDataForm.controls['email'].invalid" [class.disabled-btn]="changeDataForm.controls['email'].invalid" (click)="onChangeEmail()">Apply</button>
-      </div>
-
       <!-- Изменение имени -->
       <div class="label">Enter new name:</div>
       <div class="input-submit">
         <div class="errorMessage">{{formErrors.userName}}</div>
-        <input type="text" #nameInput formControlName="userName" placeholder="Name" [class.enabled-input]="changeDataForm.controls['userName'].valid">
+        <input type="text" #nameInput formControlName="userName" placeholder="Name"
+          [class.enabled-input]="changeDataForm.controls['userName'].valid">
         <button type="submit" [disabled]="changeDataForm.controls['userName'].invalid" (click)="onChangeName()"
           [class.disabled-btn]="changeDataForm.controls['userName'].invalid">Apply</button>
+      </div>
+
+      <!-- Изменение почты -->
+      <div class="label">Enter new email:</div>
+      <div class="input-submit">
+        <div class="errorMessage">{{formErrors.email}}</div>
+        <input type="text" #emailInput formControlName="email" placeholder="Email"
+          [class.enabled-input]="changeDataForm.controls['email'].valid">
+        <button type="submit" [disabled]="changeDataForm.controls['email'].invalid"
+          [class.disabled-btn]="changeDataForm.controls['email'].invalid" (click)="onChangeEmail()">Apply</button>
       </div>
 
       <!-- Добавить url фото -->
       <div class="label">Enter new adress of photo:</div>
       <div class="input-submit">
         <div class="errorMessage">{{formErrors.photo}}</div>
-        <input type="text" formControlName="photo" placeholder="Photo Url" [class.enabled-input]="changeDataForm.controls['photo'].valid">
+        <input type="text" formControlName="photo" placeholder="Photo Url"
+          [class.enabled-input]="changeDataForm.controls['photo'].valid">
         <button type="submit" [disabled]="changeDataForm.controls['photo'].invalid" (click)="onChangePhotoUrl()"
           [class.disabled-btn]="changeDataForm.controls['photo'].invalid">Apply</button>
       </div>
@@ -32,13 +36,16 @@
       <div class="label">Select a file:</div>
       <div class="file-upload-container">
         <label class="file-upload">
-          <span><fa name="upload"></fa></span>
+          <span>
+            <fa name="upload"></fa>
+          </span>
           <input type="file" (change)="detectFiles($event)">
         </label>
         <div class="text" [class.enabled-input]="selectedFiles">
           <p>{{inputFileText}}</p>
         </div>
-        <button (click)="onUploadPhoto()" [disabled]="!selectedFiles" [class.disabled-btn]="!selectedFiles">Apply</button>
+        <button (click)="onUploadPhoto()" [disabled]="!selectedFiles"
+          [class.disabled-btn]="!selectedFiles">Apply</button>
       </div>
 
       <!-- Удалить аккаунт -->
