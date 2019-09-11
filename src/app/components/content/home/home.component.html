@@ -22,7 +22,7 @@
     <div class="img-wrap">
       <img src="/assets/images/line.png" alt="">
     </div>
-    <h2>Структура проекта</h2>
+    <h2>Где карта, Билли? Нам нужна карта...</h2>
     <div class="description">
       <p>
         Схематическое расположение компонентов:
@@ -42,37 +42,157 @@
 
       <h3>Firebase</h3>
       <ul>
-        <li>Firebase Authentication - используется для создания аккаунта пользователя, удаления аккаунта,
+        <li><a href="https://firebase.google.com/docs/auth?authuser=0">Firebase Authentication</a> - используется для
+          создания аккаунта пользователя, удаления аккаунта,
           входа пользователя в уже существующую учетную запись, выхода из аккаунта, а также изменения личных данных
-          зарегистрированного пользователя. Применяется в проекте в сервисах auth.service.ts и user.service.ts
+          зарегистрированного пользователя. Применяется в проекте в сервисах <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/auth.service.ts">auth.service.ts</a>
+          и <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/user.service.ts">user.service.ts</a>.
         </li>
         <li>
-          Firebase Realtime Database - NoSQL облачная база данных. На данном этапе написания приложения используется для
-          хранения пользователя и его данных,
-          расширяя функционал Firebase Authentication, путем добавления дополнительных полей в запись. Применяется в
-          user.service.ts
+          <a href="https://firebase.google.com/docs/database?authuser=0">Firebase Realtime Database</a>
+          - NoSQL облачная база данных. На данном этапе написания приложения используется для
+          хранения пользователя и его данных.
+          Расширяет функционал <a href="https://firebase.google.com/docs/auth?authuser=0">Firebase Authentication</a>,
+          путем создания записи в БД, с данными аналогичными, содержащимся в <a
+            href="https://firebase.google.com/docs/auth/web/manage-users">firebase.auth().currentUser</a> с добавлением
+          дополнительных полей в запись. Применяется в
+          <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/user.service.ts">user.service.ts</a>.
         </li>
         <li>
-          Firebase Cloud Storage - облачное хранилище, применяемое для хранения файлов. В конкретном случае используется
+          <a href="https://firebase.google.com/docs/storage?authuser=0">Firebase Cloud Storage</a>
+          - облачное хранилище, применяемое для хранения файлов. В конкретном случае используется
           для
-          хранения какртинок-аватаров пользователя, загруженных с локальной ЭВМ. Реализовано в user.service.ts
+          хранения какртинок-аватаров пользователя, загруженных с локальной ЭВМ. Реализовано в <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/user.service.ts">user.service.ts</a>.
         </li>
         <li>
-          Firebase Cloud Functions - облачные функции. В проекте присутсвует функция для удаления аккаунта вновь
+          <a href="https://firebase.google.com/docs/functions?authuser=0">Firebase Cloud Functions</a>
+          - облачные функции. В проекте присутсвует функция для удаления аккаунта вновь
           зарегистрированного
           пользователя, если email, указанный при регистрации, не был подтвержден в течение часа. Пользователь
-          удаляется, как из Firebase Authentication,
-          так и из Firebase RTDB. Функция реализована в корне проекта в каталоге functions.
+          удаляется как из Firebase Authentication,
+          так и из Firebase RTDB. Функция реализована в корне проекта в каталоге <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/functions">functions</a>.
         </li>
       </ul>
 
       <h3>Angular</h3>
+      <h4>Привязка данных</h4>
       <ul>
         <li>
-
+          Иннтерполяция - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/user-info/user-info.component.html">user-info.component.html</a>
+          например, строки 15, 25.
+        </li>
+        <li>
+          Односторонняя привязка свойства элемента DOM к значению компонента. Например, строка 47 <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/change-user-data/change-user-data.component.html">change-user-data.component.html</a>.
+        </li>
+        <li>Привязка метода компонента к событию в DOM - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/change-user-data/change-user-data.component.html">change-user-data.component.html</a>
+          строка 47.</li>
+        <li>
+          Class binding - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/change-user-data/change-user-data.component.html">change-user-data.component.html</a>
+          строка 48.
+        </li>
+        <li>
+          Использование шаблонных переменных, ViewChild - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/content/change-user-data">change-user-data.component</a>
+          для фокусировки на соответсвующем инпуте в зависимости от параметра строки запроса.
         </li>
       </ul>
-      <p></p>
+      <h4>Взаимодействие между компонентами</h4>
+      <ul>
+        <li>Передача данных в дочерний компонент - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/app.component.html">app.component.html</a>
+          строка 11.</li>
+        <li>Взаимодействие между не родственными компонентами посредством сервиса. Реализовано для
+          сворачивания-разворачивания навбара компонента <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/ui-home">ui-home.component</a>
+          при клике по "гамбургеру" в хеддере <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/header-footer/header">header.component</a>
+          посредством сервиса <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/common.service.ts">common.service.ts</a>.
+          Аналогичным образом, при помощи сервиса <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/modal.service.ts">modal.service.ts</a>,
+          сообщаются компоненты <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/content/user-info">user-info.component</a>
+          и <a href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app">app.component</a>
+          с целью вызова и отображения тултипа - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/tooltip/tooltip">tooltip.component</a>.
+        </li>
+      </ul>
+      <h4>Директивы</h4>
+      <ul>
+        <li>
+          Атрибутивные директивы. ngStyle - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/user-info/user-info.component.html">user-info.component.html</a>
+          строка 6.
+        </li>
+        <li>
+          Структурные директивы. ngIf - например, <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/user-info/user-info.component.html">user-info.component.html</a>
+          строка 6.
+          ngFor - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/slider/slider.component.html">slider.component.html</a>.
+        </li>
+      </ul>
+      <h4>Сервисы</h4>
+      <div>
+        В проекте применяется ряд сервисов, для выполнения различных задач. Лежат в папке <a
+          href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/services">services</a>
+        .
+      </div>
+      <h4>Формы</h4>
+      <div>
+        Работа с формами осуществляется с использованием подхода Reactive Forms. Примеры использования - <a
+          href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/content/change-user-data">change-user-data.component</a>,
+        а также в компонентах-модальных окнах <a
+          href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/modal">app/components/modal</a>
+        .
+      </div>
+      <h4>Маршрутизация</h4>
+      <ul>
+        <li>
+          В проекте применена техника Lazy Loading. Основной модуль с маршрутами - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/app.routing.module">app.routing.module</a>,
+          дочерние - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/ui-home/ui-home.module.ts">ui-home.module</a>,
+          <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/change-user-data/change-user-data.module.ts">change-user-data.module</a>,
+          <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/tasks-home/tasks-home.module.ts">tasks-home.module</a>.
+
+        </li>
+        <li>
+          Параметр строки запроса - <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/components/content/user-info/user-info.component.ts">user-info.component.ts</a>
+          строка 69.
+        </li>
+        <li>
+          Guard - в проекте используется для предотвращения перехода на главную страницу UI (<a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/content/ui-home">ui-home.component</a>)
+          неавторизованного пользователя, а также автоматического выхода из аккаунта при уходе с данной страницы. Для
+          выполнения вышеуказанных действий создан сервис <a
+            href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/blob/master/src/app/services/guard.service.ts">guard.service.ts</a>.
+        </li>
+      </ul>
+      <h4>Анимация</h4>
+      <div>
+        Организована с использованием Angular animations. Применяется в компоненте <a
+          href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/components/content/ui-home">ui-home.component</a>
+        для сворачивания-разворачивания навбара (на определенных разрешениях экрана).
+      </div>
+
+      <h3>Other</h3>
+      <ul>
+        <li>Предпринята попытка использования Redux для работы с текущим пользователем и его данными - <a href="https://github.com/HlopchaMaly/AngularFirebaseAuthorization/tree/master/src/app/redux">src/app/redux</a>.</li>
+        <li>Использован css препроцессор Sass.</li>
+      </ul>
     </div>
   </div>
 </div>

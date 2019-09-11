@@ -38,10 +38,21 @@
         family: 'Proxima Nova Lt';
         weight: 600;
         style: normal;
-        size: 32px;
+        size: 30px;
       }
 
-      margin: 15px 0;
+      margin: 0;
+    }
+
+    h4 {
+      font: {
+        family: 'Proxima Nova Lt';
+        weight: 600;
+        style: normal;
+        size: 20px;
+      }
+
+      margin: 0;
     }
 
     .description {
@@ -54,8 +65,23 @@
       p {
         @include font-regular(18px);
         display: block;
+      }
 
+      ul {
+        margin: 0;
+        li {
+          @include font-regular(18px);
+          a {
+            text-decoration: none;
+          }
+        }
+      }
 
+      div {
+        @include font-regular(18px);
+        a {
+          text-decoration: none;
+        }
       }
     }
   }

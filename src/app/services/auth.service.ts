@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ModalService } from './modal.service';
 import { UserService } from './user.service';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+//import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class AuthService {
   public currentAuthState: boolean;
   getCurrentAuthState: EventEmitter<boolean> = new EventEmitter();
   public err: EventEmitter<string> = new EventEmitter();
-  public userState: Observable<User>;
+  //public userState: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth, private modalService: ModalService,
     private userService: UserService, private router: Router) {
@@ -45,8 +45,8 @@ export class AuthService {
 
   // Регистрация email/password.
   // При создании нового пользователя firebase запускается облачная функция-триггер (taskmanager/functions).
-  // Если адрес электронной почты не будет подтвержден в течении часа пользователь будет удален
-  // как из realtime db, так и из аккаунтов firebase.auth.
+  // Если адрес электронной почты не будет подтвержден в течение часа - пользователь будет удален
+  // как из realtime db, так и из аккаунта firebase.auth.
   emailSignUp(email: string, password: string, userName: string) {
 
     // Устанавливаем тип сохранения состояния аутентификации.
