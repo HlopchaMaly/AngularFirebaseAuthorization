@@ -6,7 +6,7 @@ $input-height: 45px;
 $font-size-minimal: 20px;
 
 %btn {
-  width: 15%;
+  width: 25%;
   background-color: $primary-color-grey-second;
   color: white;
   border: 2px solid $primary-color-grey-second;
@@ -82,6 +82,8 @@ $font-size-minimal: 20px;
         position: relative;
         height: $input-height;
         margin-bottom: 15px;
+        // IE is dirty bastard.
+        width: 60%;
 
         .errorMessage {
           position: absolute;
@@ -94,7 +96,7 @@ $font-size-minimal: 20px;
 
         input {
           padding: 0 2%;
-          width: 45%;
+          width: 75%;
 
           border: {
             left: $border;
@@ -123,6 +125,7 @@ $font-size-minimal: 20px;
 
         button {
           @extend %btn;
+
         }
 
 
@@ -140,7 +143,7 @@ $font-size-minimal: 20px;
         display: flex;
         flex-direction: row;
         align-items: stretch;
-        width: 100%;
+        width: 60%;
         height: $input-height;
         margin-bottom: 15px;
 
@@ -149,7 +152,7 @@ $font-size-minimal: 20px;
           justify-content: center;
           align-items: center;
           position: relative;
-          width: 6%;
+          width: 10%;
           overflow: hidden;
           background-color: $primary-color-grey-second;
           color: white;
@@ -185,7 +188,7 @@ $font-size-minimal: 20px;
         .text {
           display: flex;
           align-items: center;
-          width: 39%;
+          width: 65%;
           padding: 0 2%;
 
           color: #d3d0d0;
@@ -210,6 +213,7 @@ $font-size-minimal: 20px;
 
         button {
           @extend %btn;
+          width: 25%;
         }
 
         .disabled-btn {
@@ -266,27 +270,11 @@ $font-size-minimal: 20px;
     .subcontainer {
       form {
         .input-submit {
-          input {
-            width: 60%;
-          }
-
-          button {
-            width: 20%;
-          }
+          width: 100%;
         }
 
         .file-upload-container {
-          .file-upload {
-            width: 9%;
-          }
-
-          .text {
-            width: 51%;
-          }
-
-          button {
-            width: 20%;
-          }
+          width: 100%;
         }
       }
     }
@@ -300,7 +288,6 @@ $font-size-minimal: 20px;
         .input-submit {
           input {
             padding: 0 4%;
-            width: 75%;
 
             &::-webkit-input-placeholder {
               font-size: $font-size-minimal;
@@ -312,28 +299,6 @@ $font-size-minimal: 20px;
           }
 
           button {
-            width: 25%;
-            font-size: $font-size-minimal;
-          }
-        }
-
-        .file-upload-container {
-          .file-upload {
-            width: 13%;
-
-            span {
-              font-size: $font-size-minimal;
-            }
-          }
-
-          .text {
-            padding: 0 4%;
-            width: 62%;
-            font-size: $font-size-minimal;
-          }
-
-          button {
-            width: 25%;
             font-size: $font-size-minimal;
           }
         }
