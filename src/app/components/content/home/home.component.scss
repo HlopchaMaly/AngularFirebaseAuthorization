@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 60px;
+    margin-bottom: 20px;
 
     .img-wrap {
       width: 88%;
@@ -22,45 +23,46 @@
       }
     }
 
-    h2 {
-      font: {
-        family: 'Proxima Nova Lt';
-        weight: 600;
-        style: normal;
-        size: 36px;
-      }
-
-      margin: 15px 0;
-    }
-
-    h3 {
-      font: {
-        family: 'Proxima Nova Lt';
-        weight: 600;
-        style: normal;
-        size: 30px;
-      }
-
-      margin: 0;
-    }
-
-    h4 {
-      font: {
-        family: 'Proxima Nova Lt';
-        weight: 600;
-        style: normal;
-        size: 20px;
-      }
-
-      margin: 0;
-    }
-
     .description {
       display: flex;
       flex-direction: column;
       align-items: left;
       margin: 0 0 10px 0;
       width: 88%;
+
+      h2 {
+        font: {
+          family: 'Proxima Nova Lt';
+          weight: 600;
+          style: normal;
+          size: 36px;
+        }
+        text-align: center;
+        margin: 15px 0;
+      }
+
+      h3 {
+        font: {
+          family: 'Proxima Nova Lt';
+          weight: 600;
+          style: normal;
+          size: 30px;
+        }
+
+        color: $primary-color-grey;
+        margin: 7px 0;
+      }
+
+      h4 {
+        font: {
+          family: 'Proxima Nova Lt';
+          weight: 600;
+          style: normal;
+          size: 20px;
+        }
+
+        margin: 5px 0;
+      }
 
       p {
         @include font-regular(18px);
@@ -69,20 +71,44 @@
 
       ul {
         margin: 0;
+        padding: 0 0 0 30px;
         li {
           @include font-regular(18px);
+          margin-bottom: 5px;
+
           a {
             text-decoration: none;
+            color: #0000ee;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+
+          .definition {
+            font-weight: bold;
+            color: $primary-color-grey;
           }
         }
       }
 
       div {
         @include font-regular(18px);
+        margin-bottom: 4px;
+
         a {
           text-decoration: none;
+          color: #0000ee;
+
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
   }
+}
+
+@media (max-width: 576px) {
+
 }

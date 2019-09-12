@@ -58,7 +58,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .container {
     .subcontainer {
       justify-content: space-around;
@@ -86,7 +86,7 @@
         }
 
         .email {
-          margin-right: 20px;
+          font-size: 26px;
         }
       }
     }

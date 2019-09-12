@@ -111,7 +111,6 @@
         @extend %border-padding;
         margin-left: 10px;
         width: 100%;
-
         .name-state {
           border-bottom: 1px solid #edeef0;
           padding-bottom: 10px;
@@ -236,6 +235,7 @@
       flex-direction: column;
       align-items: center !important;
       justify-content: center;
+      margin-left: 0;
 
       .box-photo {
         .photo-container {
@@ -246,11 +246,13 @@
 
       .box-info {
         margin-top: 10px;
+        width: 95% !important;
+        margin-left: 0 !important;
       }
     }
 
     .subcontainer-2 {
-      margin-top: 10px;
+      margin-top: 10px !important;
 
       .box {
         font-size: 24px;
