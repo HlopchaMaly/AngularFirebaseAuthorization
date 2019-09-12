@@ -8,8 +8,8 @@ admin.initializeApp(functions.config().firebase);
 // если email, указанный при регистрации не был подтвержден в течение часа.
 
 export const deleteNoVerificatedUserTrigger = functions.auth.user().onCreate((user) => {
-    const oneMinute: number = 60000;
-    const countdown = timer(oneMinute);
+    const oneHour: number = 3600000;
+    const countdown = timer(oneHour);
     
     countdown.toPromise().then(() => {
         admin.auth().getUser(user.uid).then(currentUser => {
