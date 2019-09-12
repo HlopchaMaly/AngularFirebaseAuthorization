@@ -37,7 +37,9 @@
           style: normal;
           size: 36px;
         }
-        text-align: center;
+        align-self: center;
+        display: block;
+        text-align: center !important;
         margin: 15px 0;
       }
 
@@ -67,11 +69,22 @@
       p {
         @include font-regular(18px);
         display: block;
+        margin-bottom: 7px;
+
+        a {
+          text-decoration: none;
+          color: #0000ee;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
 
       ul {
         margin: 0;
         padding: 0 0 0 30px;
+
         li {
           @include font-regular(18px);
           margin-bottom: 5px;
@@ -107,8 +120,4 @@
       }
     }
   }
-}
-
-@media (max-width: 576px) {
-
 }

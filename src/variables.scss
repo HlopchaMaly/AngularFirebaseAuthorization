@@ -59,7 +59,7 @@ $primary-color-light-grey: #edeef0;
   }
 }
 
-@mixin  font-black($fontSize) {
+@mixin font-black($fontSize) {
   font: {
     family: 'Proxima Nova Bl';
     weight: 900;
@@ -68,7 +68,7 @@ $primary-color-light-grey: #edeef0;
   }
 }
 
-@mixin  font-bold($fontSize) {
+@mixin font-bold($fontSize) {
   font: {
     family: 'Proxima Nova Rg';
     weight: bold;

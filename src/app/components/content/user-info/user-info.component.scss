@@ -38,7 +38,6 @@
       display: flex;
       align-items: flex-start;
 
-
       .box-photo {
         @extend %border-padding;
         display: flex;
@@ -111,6 +110,7 @@
         @extend %border-padding;
         margin-left: 10px;
         width: 100%;
+
         .name-state {
           border-bottom: 1px solid #edeef0;
           padding-bottom: 10px;
