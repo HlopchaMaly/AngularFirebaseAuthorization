@@ -4,7 +4,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ModalService } from './modal.service';
 import { UserService } from './user.service';
 import { User } from '../models/user.model';
-//import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,6 @@ export class AuthService {
   public currentAuthState: boolean;
   getCurrentAuthState: EventEmitter<boolean> = new EventEmitter();
   public err: EventEmitter<string> = new EventEmitter();
-  //public userState: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth, private modalService: ModalService,
     private userService: UserService, private router: Router) {

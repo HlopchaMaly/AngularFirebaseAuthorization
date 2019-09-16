@@ -14,6 +14,7 @@ export class ConfirmActionDeleteComponent implements OnInit, OnDestroy {
 
   @Input() user: User;
   passwordForm: FormGroup;
+
   subscriber: Subscription;
 
   constructor(private modalService: ModalService, private userService: UserService) {

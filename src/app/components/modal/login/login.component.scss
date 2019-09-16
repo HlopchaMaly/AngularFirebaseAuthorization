@@ -105,6 +105,9 @@
     .btnDisabled {
       background: rgb(67, 112, 112);
       cursor: default;
+      &:active {
+        background: rgb(67, 112, 112);
+      }
     }
 
     .link {

@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { AuthService } from 'src/app/services/auth.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -26,91 +26,58 @@ import { EmailFormComponent } from '../email-form/email-form.component';
 export class LoginComponent implements OnInit, OnDestroy {
 
   private formSubscriber: Subscription;
-  private errorSubscriber: Subscription;
+  private fireErrorSubscriber: Subscription;
+
+  fireEmailError = '';
+  firePasswordError = '';
 
   needCreateAccount = false;
   currentVisibleState = 'unvisible';
 
-  myError = '';
-
   actionType = 'Login';
   phraseForToggle = 'Don\'t have an account?';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private modalService: ModalService) {
-    this.generateAuthorisationErr();
+
+
+  constructor(private authService: AuthService, private modalService: ModalService) {
+    this.generateFireAuthorisationErr();
    }
 
-  loginForm: FormGroup;
+  public loginForm: FormGroup;
+  public email: FormControl;
+  public password: FormControl;
+  public userName: FormControl;
 
-  formErrors = {
-    email: '',
-    password: '',
-    userName: ''
-  };
+  private createFormControls(): void {
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.password = new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)] );
+    this.userName = new FormControl('', [
+      Validators.required,
+      // 2 - 22 симвлола, без кириллицы, начало с английской.
+      Validators.pattern('[a-zA-Z][a-zA-Z0-9-_/.]{1,20}$')
+    ]);
+  }
 
-  validationMessages = {
-    email: {
-      'required': 'Required field',
-      'email': 'Incorrect email format'
-    },
-    password: {
-      'required': 'Required field',
-      'minlength': 'At least 6 characters'
-    },
-    userName: {
-      'required': 'Required field',
-      'pattern': 'Incorrect name format'
-    }
-  };
+  private createForm(): void {
+    this.loginForm = new FormGroup({
+      email: this.email,
+      password: this.password,
+      userName: this.userName
+    });
+  }
 
   ngOnInit() {
-    this.buildForm();
+    this.createFormControls();
+    this.createForm();
+
+    // Форма выполняет две функции - авторизации и регистрации. Если необходима форма
+    // авторизации делаем инпут "userName" (присутствует только в форме регистрации) неактивным и удаляем валидаторы.
     this.loginForm.controls['userName'].clearValidators();
     this.loginForm.controls['userName'].disable();
-  }
-
-  buildForm() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [
-        Validators.required,
-        Validators.email
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(6)
-      ]]
-      ,
-      userName: ['', [
-        Validators.required,
-        // 2-20 символов, без кириллицы, первый символ буква, допускаются тире, слешь, подчеркивание, точка
-        Validators.pattern('^[a-zA-Z][a-zA-Z0-9-_/.]{1,20}$')
-      ]]
+    this.formSubscriber = this.loginForm.valueChanges.subscribe(data => {
+      this.fireEmailError = '';
+      this.firePasswordError = '';
     });
-
-    this.formSubscriber = this.loginForm.valueChanges.subscribe(data => this.onValueChange(data));
-    this.onValueChange();
-  }
-
-  onValueChange(data?: any) {
-    if (!this.loginForm) {
-      return;
-    }
-    const form = this.loginForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        this.formErrors[field] = '';
-        const control = form.get(field);
-
-        if (control && control.dirty && !control.valid) {
-          const message = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += message[key] + ' ';
-            }
-          }
-        }
-      }
-    }
   }
 
   // Переключение типа формы авторизация/регистрация.
@@ -121,7 +88,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.phraseForToggle = 'Back to login';
       this.needCreateAccount = true;
       this.loginForm.reset();
-      this.loginForm.controls['userName'].setValidators([Validators.required, Validators.maxLength(30)]);
+      this.loginForm.controls['userName'].setValidators([
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.pattern('[a-zA-Z][a-zA-Z0-9-_/.]{1,20}$')
+      ]);
       this.loginForm.controls['userName'].enable();
     } else {
       this.currentVisibleState = 'unvisible';
@@ -153,30 +124,36 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.modalService.init(EmailFormComponent, {}, {});
   }
 
-  // Метод для вывода в форму сообщений об ошибках авторизации firebase.
-  generateAuthorisationErr() {
+  // // Метод для вывода в форму сообщений об ошибках авторизации firebase.
+  generateFireAuthorisationErr() {
     // Сообщения об ошибках, выдаваемое firebase.
     const invalidPasswordFirebaseMsg = 'The password is invalid or the user does not have a password.';
     const invalidEmailFirebaseMsg = 'There is no user record corresponding to this identifier. The user may have been deleted.';
     const existEmailFirebaseMsg = 'The email address is already in use by another account.';
+    const invalidEmailFormatFirebaseMsg = 'The email address is badly formatted.';
 
     // Сообщения об ошибках, выводимое в форму.
-    const invalidPasswordMsg = 'The password is invalid';
-    const invalidEmailMsg = 'The email is invalid';
-    const existEmailMsg = 'The email address is already exist';
+    const invalidPasswordMsg = 'The password is invalid.';
+    const invalidEmailMsg = 'The email is invalid.';
+    const existEmailMsg = 'The email address is already exist.';
+    const invalidEmailFormatMsg = 'The email is badly formatted.';
 
-    this.errorSubscriber = this.authService.err.subscribe((errMsg: string) => {
+    this.fireErrorSubscriber = this.authService.err.subscribe((errMsg: string) => {
       switch (errMsg) {
         case invalidPasswordFirebaseMsg: {
-          this.formErrors.password = invalidPasswordMsg;
+          this.firePasswordError = invalidPasswordMsg;
           break;
         }
         case invalidEmailFirebaseMsg: {
-          this.formErrors.email = invalidEmailMsg;
+          this.fireEmailError = invalidEmailMsg;
           break;
         }
         case existEmailFirebaseMsg: {
-          this.formErrors.email = existEmailMsg;
+          this.fireEmailError = existEmailMsg;
+          break;
+        }
+        case invalidEmailFormatFirebaseMsg: {
+          this.fireEmailError = invalidEmailFormatMsg;
           break;
         }
         default: {
@@ -187,8 +164,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.fireErrorSubscriber.unsubscribe();
     this.formSubscriber.unsubscribe();
-    this.errorSubscriber.unsubscribe();
   }
 
 }

@@ -5,7 +5,9 @@
       <!-- Изменение имени -->
       <div class="label">Enter new name:</div>
       <div class="input-submit">
-        <div class="errorMessage">{{formErrors.userName}}</div>
+        <!-- <div class="errorMessage">{{formErrors.userName}}</div> -->
+        <div *ngIf="userName.errors?.pattern || userName.errors?.maxlength" class="errorMessage">Incorrect name format
+        </div>
         <input type="text" #nameInput formControlName="userName" placeholder="Name"
           [class.enabled-input]="changeDataForm.controls['userName'].valid">
         <button type="submit" [disabled]="changeDataForm.controls['userName'].invalid" (click)="onChangeName()"
@@ -15,9 +17,12 @@
       <!-- Изменение почты -->
       <div class="label">Enter new email:</div>
       <div class="input-submit">
-        <div class="errorMessage">{{formErrors.email}}</div>
+        <!-- <div *ngIf="disableEmailMsg" class="errorMessage">{{formErrors.email}}</div> -->
+        <div *ngIf="email.errors?.email" class="errorMessage">Incorrect email format.</div>
+        <div *ngIf="fireEmailError" class="errorMessage">{{fireEmailError}}</div>
+        <div *ngIf="enableEmailErrMsg" class="errorMessage">{{firePasswordError}}</div>
         <input type="text" #emailInput formControlName="email" placeholder="Email"
-          [class.enabled-input]="changeDataForm.controls['email'].valid">
+          [class.enabled-input]="changeDataForm.controls['email'].valid" (focus)="onFocus()">
         <button type="submit" [disabled]="changeDataForm.controls['email'].invalid"
           [class.disabled-btn]="changeDataForm.controls['email'].invalid" (click)="onChangeEmail()">Apply</button>
       </div>
@@ -25,7 +30,8 @@
       <!-- Добавить url фото -->
       <div class="label">Enter new adress of photo:</div>
       <div class="input-submit">
-        <div class="errorMessage">{{formErrors.photo}}</div>
+        <!-- <div class="errorMessage">{{formErrors.photo}}</div> -->
+        <div *ngIf="photo.errors?.pattern" class="errorMessage">Incorrect url path.</div>
         <input type="text" formControlName="photo" placeholder="Photo Url"
           [class.enabled-input]="changeDataForm.controls['photo'].valid">
         <button type="submit" [disabled]="changeDataForm.controls['photo'].invalid" (click)="onChangePhotoUrl()"
@@ -51,6 +57,7 @@
       <!-- Удалить аккаунт -->
       <div class="label">Delete account:</div>
       <div class="delete-container">
+        <div *ngIf="enableDeleteErrMsg" class="errorMessage">{{firePasswordError}}</div>
         <button class="delete-account" (click)="onDelete()">Dlete account</button>
       </div>
 

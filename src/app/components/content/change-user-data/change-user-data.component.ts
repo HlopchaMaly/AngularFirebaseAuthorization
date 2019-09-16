@@ -1,6 +1,6 @@
 import { ConfirmActionDeleteComponent } from './../../modal/confirm-action-delete/confirm-action-delete.component';
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Renderer2 } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { Store } from '@ngrx/store';
@@ -31,6 +31,15 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
   private querySubscriber: Subscription;
 
   changeDataForm: FormGroup;
+  public email: FormControl;
+  public userName: FormControl;
+  public photo: FormControl;
+
+  fireEmailError = '';
+  firePasswordError = '';
+
+  enableEmailErrMsg = true;
+  enableDeleteErrMsg = true;
 
   selectedFiles: FileList;
 
@@ -38,34 +47,37 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
 
   constructor(private modalService: ModalService, private formBuilder: FormBuilder,
     private userService: UserService, private store: Store<User>, private route: ActivatedRoute) {
-      this.generateAuthorisationErr();
+      this.generateFireAuthErrMsg();
   }
 
-  formErrors = {
-    email: '',
-    userName: '',
-    photo: ''
-  };
+  private createFormControls(): void {
+    this.email = new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]);
+    this.userName = new FormControl('', [
+      Validators.required,
+      Validators.maxLength(30),
+      // 2 - 22 симвлола, без кириллицы, начало с английской.
+      Validators.pattern('[a-zA-Z][a-zA-Z0-9-_/.]{1,20}$')
+    ]);
+    this.photo = new FormControl('', [
+      Validators.required,
+     // Начало (http://www.|https://www.|http://|https://), окончание (.jpg|.png|.svg).
+        Validators.pattern('^(http://www\.|https://www\.|http://|https://)([\\S])+(\.jpg|\.png|\.svg)$')
+    ]);
+  }
 
-  // Ошибки валидации формы.
-  validationMessages = {
-    email: {
-      'required': '',
-      'email': 'Incorrect email format'
-    },
-    userName: {
-      'required': '',
-      'pattern': 'Incorrect name format'
-    },
-    photo: {
-      'required': '',
-      'pattern': 'Incorrect url path'
-    }
-  };
-
+  private createForm(): void {
+    this.changeDataForm = new FormGroup({
+      email: this.email,
+      userName: this.userName,
+      photo: this.photo
+    });
+  }
   ngOnInit() {
-
-    this.buildForm();
+    this.createFormControls();
+    this.createForm();
 
     // Наблюдаем пользователя в store.
     this.userSubscriber = this.store.select('userPage').subscribe(({ user }) => {
@@ -90,58 +102,27 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
         }
      }
     });
-  }
 
-  buildForm() {
-    this.changeDataForm = this.formBuilder.group({
-      email: ['', [
-        Validators.required,
-        // Стандартный валидатор.
-        Validators.email
-      ]],
-      userName: ['', [
-        Validators.required,
-        // 2 - 22 симвлола, без кириллицы, начало с английской.
-        Validators.pattern('^[a-zA-Z][a-zA-Z0-9-_/.]{1,20}$')
-      ]],
-      photo: ['', [
-        Validators.required,
-        // Начало (http://www.|https://www.|http://|https://), окончание (.jpg|.png|.svg).
-        Validators.pattern('^(http://www\.|https://www\.|http://|https://)([\\S])+(\.jpg|\.png|\.svg)$')
-      ]],
-
+    this.formSubscriber = this.changeDataForm.valueChanges.subscribe(data => {
+      this.clearFireErrorMsg();
     });
-
-    this.formSubscriber = this.changeDataForm.valueChanges.subscribe(data => this.onValueChange(data));
-    this.onValueChange();
   }
 
-  // Отображение ошибок валидации в UI.
+  clearFireErrorMsg() {
+      this.fireEmailError = '';
+      this.firePasswordError = '';
+  }
+
   onValueChange(data?: any) {
-    if (!this.changeDataForm) {
-      return;
-    }
-    const form = this.changeDataForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const message = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += message[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+    this.firePasswordError = '';
+    this.fireEmailError = '';
   }
 
   // Вызов модального окна-подтверждения при изменении почты (confirm-action-change-email.component).
   onChangeEmail() {
     const newEmail = this.changeDataForm.controls['email'].value;
     this.modalService.init(ConfirmActionChangeEmailComponent, {email: newEmail}, {});
+    this.clearFireErrorMsg();
   }
 
   onChangeName() {
@@ -176,18 +157,46 @@ export class ChangeUserDataComponent implements OnInit, OnDestroy {
   // Вызов модального окна-подтверждения при удалении пользователя (confirm-action-delete.component).
   onDelete() {
     this.modalService.init(ConfirmActionDeleteComponent, {user: this.user}, {});
+    this.clearFireErrorMsg();
+    this.enableDeleteErrMsg = true;
+    this.enableEmailErrMsg = false;
   }
 
   // Отображение ошибки "адресПочтыУжеЗанят" при изменении почты.
-  generateAuthorisationErr() {
+  generateFireAuthErrMsg() {
+    const invalidPasswordFirebaseMsg = 'The password is invalid or the user does not have a password.';
     const existEmailFirebaseMsg = 'The email address is already in use by another account.';
-    const invalidEmailMsg = 'This email already exists';
+    const invalidEmailFormatFirebaseMsg = 'The email address is badly formatted.';
+
+    const invalidEmailMsg = 'The email address is already exist';
+    const invalidPasswordMsg = 'The password is invalid.';
+    const invalidEmailFormatMsg = 'The email is badly formatted.';
 
     this.errorSubscriber = this.userService.err.subscribe((errMsg: string) => {
-      if (errMsg === existEmailFirebaseMsg) {
-        this.formErrors.email = invalidEmailMsg;
+      switch (errMsg) {
+        case invalidPasswordFirebaseMsg: {
+          this.firePasswordError = invalidPasswordMsg;
+          break;
+        }
+        case existEmailFirebaseMsg: {
+          this.fireEmailError = invalidEmailMsg;
+          break;
+        }
+        case invalidEmailFormatFirebaseMsg: {
+          this.fireEmailError = invalidEmailFormatMsg;
+          break;
+        }
+        default: {
+          break;
+        }
       }
     });
+  }
+
+  onFocus() {
+    this.clearFireErrorMsg();
+    this.enableDeleteErrMsg = false;
+    this.enableEmailErrMsg = true;
   }
 
   ngOnDestroy() {

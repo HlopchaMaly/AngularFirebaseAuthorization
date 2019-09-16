@@ -48,7 +48,6 @@ export class UserService {
         tempUser.email = this.afAuth.auth.currentUser.email;
         this.updateUser(tempUser);
       }
-
     });
   }
 
@@ -77,7 +76,7 @@ export class UserService {
           this.store.dispatch(new DeleteUser(user));
         });
       });
-    });
+    }).catch(error => this.handleError(error));
   }
 
   // Обновление данных пользователя.
@@ -167,7 +166,7 @@ export class UserService {
           this.afAuth.auth.signOut();
         });
       }).catch(error => this.handleError(error));
-    });
+    }).catch(error => this.handleError(error));
   }
 
   // Сброс пароля.
